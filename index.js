@@ -5,6 +5,10 @@ class Account {
     this.username = username;
     this.balance = 0;
   }
+
+  commit() {
+    this.account.balance += this.value;
+  }
 }
 
 class Transaction {
@@ -14,14 +18,14 @@ class Transaction {
   }
 }
 class Withdrawal extends Transaction {
-  commit() {
-    this.account.balance -= this.amount;
+  get value() {
+    return -this.value;
   }
 }
 
 class Deposit extends Transaction {
-  commit() {
-    this.account.balance += this.amount;
+  get value() {
+    return this.value;
   }
 }
 
@@ -31,7 +35,6 @@ class Deposit extends Transaction {
 const Account1 = new Account("Enze");
 
 t1 = new Withdrawal(100, Account1);
-t1.commit();
 console.log(t1);
 // console.log(Account1);
 // t1 = new Withdrawal(50.25);
